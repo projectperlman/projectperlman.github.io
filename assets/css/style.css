@@ -1,0 +1,406 @@
+/* =============== DEFAULT ==============*/
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f6fafe;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.td-none {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hide {
+    display: none;
+}
+
+/* =============== COMPONENTS ==============*/
+
+/* ======= **** HEADER STYLES **** ======*/
+
+header {
+    width: 100%;
+    height: 80px;
+    background: #3578BC;
+    border-bottom: 1px solid #dfe2ed;
+    padding: 0 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .menu-icon {
+    font-size: 32px;
+    display: none;
+}
+
+header .nav-overlay {
+    display: none;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    height: inherit;
+}
+
+header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+header .nav-menu {
+    display: flex;
+}
+
+header .nav-menu .nav-item a {
+    display: block;
+    text-decoration: none;
+    padding: 30px 16px;
+    color: #173E69;
+}
+
+header .nav-menu .nav-item a:hover {
+    color: #173E69;
+}
+
+header .nav-menu .nav-item .nav-icon {
+    transform: translateY(4px);
+    font-size: 16px;
+}
+
+header .nav-menu .nav-item {
+    position: relative;
+}
+
+header .nav-menu .nav-item .dropdown {
+    width: 190px;
+    position: absolute;
+    top: 80px;
+    left: 0px;
+    background-color: #fff;
+    border-radius: 5px;
+    -webkit-box-shadow: -1px -12px 20px 7px rgba(0, 0, 0, 0.11);
+    -moz-box-shadow: -1px -12px 20px 7px rgba(0, 0, 0, 0.11);
+    box-shadow: -1px -12px 20px 7px rgba(0, 0, 0, 0.11);
+    opacity: 0;
+    z-index: -5;
+    transform: translateY(35px);
+}
+
+header .nav-menu .nav-item:hover .dropdown {
+    opacity: 1;
+    z-index: 5;
+    transform: translateY(0);
+    transition: all 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+}
+
+header .nav-menu .nav-item .dropdown::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 15%;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+header .nav-menu .nav-item .dropdown li::after {
+    content: '';
+    display: block;
+    margin: 0px 16px;
+    border-bottom: 1px solid #965D62;
+}
+
+header .nav-menu .nav-item .dropdown li:last-child::after {
+    display: none;
+}
+
+header .nav-menu .nav-item .dropdown a {
+    padding: 16px;
+}
+
+.logo-wrapper {
+    font-size: 1.4rem;
+}
+
+.logo-wrapper span {
+    background-color: #3e86ac;
+    padding: 0 5px;
+    line-height: 0;
+    border-radius: 2px;
+    color: #fff;
+}
+
+/* ======= **** MEDIA QUERIES HEADER STYLES **** ======*/
+@media only screen and (max-width: 1024px) {
+    header {
+        padding: 0 10px;
+    }
+}
+
+@media only screen and (max-width: 756px) {
+    header .menu-icon {
+        display: block;
+    }
+
+    header .nav-overlay.open {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.45);
+    }
+
+    header .logo-wrapper {
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav {
+        /* To be styled */
+        flex-grow: 1;
+    }
+
+    header .search-item, header .search-item input {
+        width: 100%;
+    }
+
+    header .nav-menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        flex-direction: column;
+        height: 100%;
+        width: 250px;
+        background-color: #fff;
+        overflow-y: scroll;
+        z-index: 9999;
+        padding: 50px 0;
+        transform: translateX(-250px);
+        transition: all 0.25s ease-in-out;
+    }
+
+    header .nav-menu.open {
+        transform: translateX(0px);
+        transition: all 0.25s ease-in-out;
+    }
+
+    header .nav-menu .nav-item a {
+        padding: 16px;
+    }
+
+    header .nav-menu .nav-item {
+        flex-direction: column;
+    }
+
+    header .nav-menu .nav-item .dropdown {
+        width: 100%;
+        position: static;
+        box-shadow: none;
+        opacity: 1;
+        max-height: 0px;
+        overflow: hidden;
+        z-index: 1;
+        transform: translateY(0px);
+        transition: max-height 0.25s ease-in-out;
+    }
+
+    header .nav-menu .nav-item.active .dropdown {
+        max-height: 300px;
+        transition: max-height 0.25s ease-in-out;
+    }
+
+    header .nav-menu .nav-item .dropdown a {
+        padding-left: 32px;
+    }
+}
+
+/* =============== PAGES ==============*/
+}
+
+    body {
+      background-color: #f8f8f8;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+    }
+    .terms-main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 6px;
+    }
+    .terms-main .section {
+      margin-bottom: 40px;
+    }
+    .terms-main h2 {
+      font-size: 1.5rem;
+      color: #222;
+      margin-bottom: 10px;
+      border-left: 4px solid #006666;
+      padding-left: 10px;
+    }
+    .terms-main p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+    
+    
+/* =============== PAGES ==============*/
+blockquote {
+	border-left:4px solid #3578BC;
+	padding:0 20px;
+	font-style:italic;
+	color:rgba(0,0,0,.5);
+}
+
+.input-control { 
+display: block; 
+width: 100%; 
+font-size: 1.1rem; 
+color: #55595c; 
+background-color: #fff; 
+border: 1px solid rgba(0, 0, 0, 0.26); line-height: 1.6rem; 
+padding: 0.75rem 1rem; 
+border-radius: 3px; 
+height: 52px; 
+font-family: inherit; 
+} 
+textarea.input-control { height: unset !important; 
+} 
+.input-control-sm { height: 42px !important; display: inline-block; 
+} 
+.input-control:focus { outline: 0; border: 1px solid #59b3f0; } 
+
+
+
+.admin-table .pagination-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-table .pagination-links .link {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.admin-table .pagination-links .link.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.admin-table .pagination-links .dots {
+  padding: 8px 12px;
+  color: #333;
+  font-size: 14px;
+}
+
+.admin-table .pagination-links #prev,
+.admin-table .pagination-links #next {
+  padding: 8px 12px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  color: #007bff;
+}
+
+.admin-table .items-per-page {
+  margin-top: 20px;
+}
+
+.admin-table .items-per-page select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
+/* === Bitcoin Donation Bar (Centered, Bigger & Responsive) === */
+.page-footer .donation-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0;
+}
+
+.page-footer .btc-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #2a2a2a;
+  padding: 8px 16px;           /* bigger padding */
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  max-width: 95%;
+  overflow: hidden;
+}
+
+.page-footer .btc-icon {
+  width: 26px;                 /* bigger orange circle */
+  height: 26px;
+  border-radius: 50%;
+  background: #f7931a;         /* Bitcoin orange */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.page-footer .btc-icon ion-icon {
+  font-size: 16px;             /* bigger bitcoin symbol */
+  color: #fff;
+}
+
+.page-footer .btc-addr {
+  font-family: monospace;
+  font-size: 14px;             /* larger text */
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;            /* allows more room for address */
+}
+
+/* On wider screens, show full address */
+@media (min-width: 768px) {
+  .page-footer .btc-addr {
+    max-width: none;
+    text-overflow: clip;
+  }
+}
+
+
+.result-link {
+  text-decoration: none;
+  color: inherit; /* keeps same color as text */
+}
+
+.result-link:hover {
+  text-decoration: underline; /* optional hover effect */
+}
+
+
