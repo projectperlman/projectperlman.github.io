@@ -1,50 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://celionatti.github.io/blog-template/assets/css/admin-style.css">
-    <link rel="stylesheet" type="text/css" href="https://celionatti.github.io/blog-template/assets/css/public.css">
-    <title>Login Access | Login</title>
-</head>
-
-<body class="bg-pattern">
-    <!-- Page Container -->
-    <div class="default-page-container">
-        <form action="create.html" method="post" class="admin-form auth-form sm-form">
-            <h1 class="center form-title">Login</h1>
-
-            <div class="input-group">
-                <label for="username">Username or E-Mail</label>
-                <input type="text" name="username" id="username" class="input-control">
-            </div>
-            <div class="input-group">
-                <div class="forgot-password-wrapper">
-                    <label for="password">Password</label>
-                    <small>
-                        <a href="forgot-password.html" class="link">Forgot Password?</a>
-                    </small>
-                </div>
-                <input type="password" name="password" id="password" class="input-control">
-            </div>
-            <div class="input-group">
-                <label for="remember">
-                    <input type="checkbox" name="remember" id="remember">
-                    Remember Me
-                </label>
-            </div>
-
-            <div class="input-group">
-                <button type="submit" class="btn long-btn primary-btn big-btn">Login</button>
-            </div>
-            <p class="center">
-                <small>Don't yet have an account? you can <a href="signup.html">Sign Up</a></small>
-            </p>
-        </form>
-    </div>
-    <!-- /Page Container -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Login</title></head>
+<body>
+  <h2>Login</h2>
+  <input id="email" placeholder="Email"><br>
+  <input id="password" placeholder="Password" type="password"><br>
+  <button onclick="login()">Login</button>
+  <script>
+    async function login(){
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const res = await fetch('https://wispy-cake-24c4.anandhunv15.workers.dev//login', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({email,password})
+      });
+      const j = await res.json();
+      if(res.ok){
+        localStorage.setItem('token', j.token);
+        alert('Logged in');
+        location.href = '/dashboard.html';
+      } else alert(JSON.stringify(j));
+    }
+  </script>
 </body>
-
 </html>
