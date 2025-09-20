@@ -9,79 +9,75 @@
     <title>Create An Account | Registration</title>
 </head>
 <body class="bg-pattern">
-    <!-- Page Container -->
-    <div class="default-page-container">
-        <form id="signup-form" method="post" class="admin-form auth-form">
-            <h1 class="center form-title">Sign Up</h1>
 
-            <div class="input-group avatar-input-group center">
-                <input type="file" name="avatar" id="avatar-input" class="hide avatar-input">
-                <button type="button" class="change-avatar-btn">
-                    <span>Change</span>
-                </button>
-                <label for="avatar-input">Profile Image Optional</label>
-            </div>
+<div class="default-page-container">
+    <form id="signup-form" class="admin-form auth-form">
+        <h1 class="center form-title">Sign Up</h1>
 
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" class="input-control" required>
-            </div>
-            <div class="input-group">
-                <label for="email">E-Mail</label>
-                <input type="email" name="email" id="email" class="input-control" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="input-control" required>
-            </div>
-            <div class="input-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" name="confirm-password" id="confirm-password" class="input-control" required>
-            </div>
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="input-control" required>
+        </div>
 
-            <div class="input-group">
-                <button type="submit" class="btn long-btn primary-btn big-btn">Register</button>
-            </div>
-            <p class="center">
-                <small>Already have an account? you can <a href="login.html">Login</a></small>
-            </p>
-        </form>
-    </div>
-    <!-- /Page Container -->
+        <div class="input-group">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" class="input-control" required>
+        </div>
 
-    <script>
-    document.getElementById('signup-form').addEventListener('submit', async (e) => {
-        e.preventDefault(); // prevent page reload
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="input-control" required>
+        </div>
 
-        const email = document.getElementById('email').value.trim();
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value;
-        const confirm = document.getElementById('confirm-password').value;
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" class="input-control" required>
+        </div>
 
-        if(password !== confirm){
-            alert("Passwords do not match!");
-            return;
+        <div class="input-group">
+            <button type="submit" class="btn long-btn primary-btn big-btn">Register</button>
+        </div>
+
+        <p class="center">
+            <small>Already have an account? <a href="login.html">Login</a></small>
+        </p>
+    </form>
+</div>
+
+<script>
+document.getElementById('signup-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const confirm = document.getElementById('confirm-password').value;
+
+    if (password !== confirm) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    try {
+        const response = await fetch('https://mybackends.anandhunv15.workers.dev/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, username, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert("Account created successfully!");
+            window.location.href = 'login.html';
+        } else {
+            alert("Error: " + (data.error || "Unknown error"));
         }
+    } catch (err) {
+        alert("Network error: " + err);
+    }
+});
+</script>
 
-        try {
-            const response = await fetch('https://mybackends.anandhunv15.workers.dev/signup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, username, password })
-            });
-
-            const data = await response.json();
-
-            if(data.success){
-                alert("Account created successfully!");
-                window.location.href = 'login.html';
-            } else {
-                alert("Error: " + (data.error || "Unknown error"));
-            }
-        } catch(err) {
-            alert("Network error: " + err);
-        }
-    });
-    </script>
 </body>
 </html>
