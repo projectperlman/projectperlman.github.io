@@ -1,82 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="https://celionatti.github.io/blog-template/assets/css/admin-style.css">
   <link rel="stylesheet" href="https://celionatti.github.io/blog-template/assets/css/public.css">
-  <title>Sign Up</title>
+  <title>Sign Up | Project Perlman</title>
 </head>
 <body class="bg-pattern">
+  <div class="default-page-container">
+    <form id="signup-form" class="admin-form auth-form">
+      <h1 class="center form-title">Sign Up</h1>
 
-<div class="default-page-container">
-  <form id="signup-form" class="admin-form auth-form">
-    <h1 class="center form-title">Sign Up</h1>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input id="username" required class="input-control" autocomplete="username">
+      </div>
 
-    <div class="input-group">
-      <label for="username">Usernae</label>
-      <input type="text" id="username" class="input-control" required>
-    </div>
+      <div class="input-group">
+        <label for="email">E-Mail</label>
+        <input id="email" type="email" required class="input-control" autocomplete="email">
+      </div>
 
-    <div class="input-group">
-      <label for="email">E-Mail</label>
-      <input type="email" id="email" class="input-control" required>
-    </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" required class="input-control" autocomplete="new-password">
+      </div>
 
-    <div class="input-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" class="input-control" required>
-    </div>
+      <div class="input-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input id="confirm-password" type="password" required class="input-control" autocomplete="new-password">
+      </div>
 
-    <div class="input-group">
-      <label for="confirm-password">Confirm Password</label>
-      <input type="password" id="confirm-password" class="input-control" required>
-    </div>
+      <div class="input-group">
+        <button type="submit" class="btn long-btn primary-btn big-btn">Register</button>
+      </div>
 
-    <div class="input-group">
-      <button type="submit" class="btn long-btn primary-btn big-btn">Register</button>
-    </div>
-
-    <p class="center">
-      <small>Already have an account? <a href="login.html">Login</a></small>
-    </p>
-  </form>
-</div>
+      <p class="center">
+        <small>Already have an account? <a href="login.html">Login</a></small>
+      </p>
+      <div id="message" class="center" style="margin-top:10px;color:#b30000"></div>
+    </form>
+  </div>
 
 <script>
+const WORKER = "https://mybackends.anandhunv15.workers.dev";
+
 document.getElementById('signup-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-
   const username = document.getElementById('username').value.trim();
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
   const confirm = document.getElementById('confirm-password').value;
+  const msg = document.getElementById('message');
+  msg.textContent = "";
 
-  if (password !== confirm) {
-    alert("Passwords do not match!");
-    return;
-  }
+  if (!username || !email || !password) { msg.textContent = "Please fill all fields."; return; }
+  if (password !== confirm) { msg.textContent = "Passwords do not match."; return; }
 
   try {
-    const response = await fetch('https://mybackends.anandhunv15.workers.dev/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch(WORKER + "/signup", {
+      method: "POST",
+      credentials: "include",              // send/receive HttpOnly cookie
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, username, password })
     });
 
-    const data = await response.json();
-
+    const data = await res.json();
     if (data.success) {
-      alert("Account created successfully!");
-      window.location.href = 'login.html';
+      // session cookie is set by Worker; redirect to dashboard
+      location.href = "dashboard.html";
     } else {
-      alert("Error: " + (data.error || "Unknown error"));
+      msg.textContent = data.error || "Signup failed.";
     }
   } catch (err) {
-    alert("Network error: " + err.message);
+    msg.textContent = "Network error: " + err.message;
   }
 });
 </script>
-
 </body>
 </html>
