@@ -28,7 +28,7 @@ form.addEventListener('submit', async e => {
   e.preventDefault();
   errorDiv.textContent = '';
   const data = Object.fromEntries(new FormData(form).entries());
-  const res = await fetch('https://mybackend.anandhunv15.workers.dev', {
+  const res = await fetch('https://mybackend.anandhunv15.workers.dev/register', {
     method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)
   });
   const json = await res.json();
